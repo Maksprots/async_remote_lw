@@ -1,13 +1,11 @@
 import subprocess
 from config import Config as cf
 
-Quartus_pgm_path = ''
-
 
 class Plic:
     def __init__(self, number_of_cores):
         self.flow = open('d', 'w')
-        quartus = subprocess.run(Quartus_pgm_path + " -l",
+        quartus = subprocess.run(cf.quartus_pgm_path + " -l",
                                  stdout=self.flow,
                                  stderr=self.flow,
                                  shell=True,
@@ -24,10 +22,11 @@ class Plic:
 
     def load_to_plic(self, firmware_path):
         # одно ядро
-        one_core_cmd = '{0} -m JTAG -c "{1}" -o p;{2}'
-        result = subprocess.run(one_core_cmd.format(Quartus_pgm_path,
-                                                    self.current_port,
-                                                    firmware_path),
+
+        result = subprocess.run(cf.command_to_load_firmware_1.
+                                format(cf.quartus_pgm_path,
+                                       self.current_port,
+                                       firmware_path),
                                 stdin=self.flow,
                                 stdout=self.flow,
                                 stderr=self.flow,
