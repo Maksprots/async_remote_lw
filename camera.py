@@ -2,7 +2,7 @@ from time import time
 import cv2
 
 from exceptions import FailOpenCamera
-from config import Config as cf
+from config import Config as Cf
 
 
 class Camera:
@@ -18,7 +18,7 @@ class Camera:
         finish_time = start_time = time()
         out_file = cv2.VideoWriter(path,
                                    self.codec,
-                                   cf.fps,
+                                   Cf.fps,
                                    (self.width,
                                     self.height))
         status = True

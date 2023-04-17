@@ -12,8 +12,6 @@ class Plic:
                           shell=True,
                           text=True)
 
-        print(quartus.stdout, "\n")
-        # fpga_list = quartus.stdout.split("Info: Processing started:", 2)[0]
         if quartus.stdout.find(f"{plic_number}) ") != -1:
             current_port = quartus.stdout.split(f"{Cf.plic_number}) ", 2)[1]
             self.current_port = current_port.split('\n', 1)[0]
@@ -32,7 +30,7 @@ class Plic:
                          shell=True,
                          text=True)
 
-        return True if result.stdout.count(Cf.main_key) else False
+        return True if result.stdout.count(Cf.success_quartus_msg) else False
 
 
 if __name__ == '__main__':
